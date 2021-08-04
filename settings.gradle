@@ -1,0 +1,5 @@
+rootProject.name = "JSSDK_ExtendLib"
+include ':app'
+include ':MultiReaderLib'
+include ':communication'
+include ':JsExtend'
