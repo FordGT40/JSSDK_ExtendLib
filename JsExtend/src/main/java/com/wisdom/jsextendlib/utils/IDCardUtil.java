@@ -51,13 +51,18 @@ public class IDCardUtil {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
+
                 case ReadOnceDone:
                     idCard = (IDCard) msg.obj;
+                   // Log.i("TAG", "photo:------- "+idCard.getPhoto());
                     getCardListener.succeed(idCard);
                     CloseReader();
                     break;
                 case UpdateStatus:
-                    getCardListener.error("读卡器打开失败");
+                    String stutes = (String)msg.obj;
+                    if(stutes.contains("读卡器打开失败")){
+                        getCardListener.error("读卡器打开失败");
+                    }
 //                    tvReaderStatus.setText((String) msg.obj);
                     break;
                 case ReadThreadDone:
@@ -148,7 +153,7 @@ public class IDCardUtil {
                     {
                         success++;
                         mHandler.obtainMessage(ReadOnceDone,retInfo.card).sendToTarget();
-                        mHandler.obtainMessage(UpdateStatus,String.format("读卡总数=%s,成功=%s",count,success)).sendToTarget();
+                        //mHandler.obtainMessage(UpdateStatus,String.format("读卡总数=%s,成功=%s",count,success)).sendToTarget();
                         Thread.sleep(500);
                     }
                     else if(retInfo.errCode==IDCardReaderRetInfo.ERROR_RECV_FINDCARD){
@@ -165,7 +170,8 @@ public class IDCardUtil {
                     }
                     else{
                         String status= util.bytesToHexString(new byte[]{retInfo.sw1,retInfo.sw2,retInfo.sw3});
-                        mHandler.obtainMessage(UpdateStatus,String.format("读卡总数=%s,成功=%s,状态=%s",count,success,status)).sendToTarget();
+                       // if()
+                       // mHandler.obtainMessage(UpdateStatus,String.format("读卡总数=%s,成功=%s,状态=%s",count,success,status)).sendToTarget();
                         Thread.sleep(200);
                     }
 
