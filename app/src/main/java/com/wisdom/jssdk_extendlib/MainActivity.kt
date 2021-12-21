@@ -39,7 +39,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 //        if(!url.isNullOrBlank()){
-            webView!!.loadUrl("http://192.168.1.39:8090/jstest/index.html")
+//            webView!!.loadUrl("http://192.168.1.39:8090/jstest/index.html")
+            webView!!.loadUrl("http://192.168.111.173:8000/index.html")
 //        }
 //            //访问网页
 
