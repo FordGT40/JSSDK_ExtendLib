@@ -20,9 +20,9 @@ import com.wisdom.jsextendlib.utils.IDCardUtil;
 public class GetIDCardHandler  extends BridgeHandler {
     @Override
     public void handler(Context context, String data, final CallBackFunction function) {
-        IDCardUtil.initReadCard(context);
-        IDCardUtil.startReadThread();
         IDCardUtil idCardUtil = new IDCardUtil();
+        idCardUtil.initReadCard(context);
+        idCardUtil.startReadThread();
         idCardUtil.setOnChangeListener(new IDCardUtil.GetCardListener() {
             @Override
             public void succeed(IDCard idcard) {
@@ -32,12 +32,11 @@ public class GetIDCardHandler  extends BridgeHandler {
 
             @Override
             public void error(String string) {
-                BaseModel model = new BaseModel("成功",1,string);
+                BaseModel model = new BaseModel("string",1,string);
                 function.onCallBack(GsonUtils.toJson(model));
             }
 
         });
-
     }
 
 }

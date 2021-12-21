@@ -37,7 +37,7 @@ public class IDCardUtil {
     // 持有一个接口对象
    static GetCardListener getCardListener;
 
-    public static void initReadCard(Context context){
+    public  void initReadCard(Context context){
         idCardReaderModule=IDCardReaderModule.getInstance(context);
     }
 
@@ -51,7 +51,6 @@ public class IDCardUtil {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
-
                 case ReadOnceDone:
                     idCard = (IDCard) msg.obj;
                    // Log.i("TAG", "photo:------- "+idCard.getPhoto());
@@ -80,10 +79,12 @@ public class IDCardUtil {
      */
     private static void CloseReader(){
         stopRead();
-        idCardReaderModule.close();
+        if (idCardReaderModule!=null) {
+            idCardReaderModule.close();
+        }
     }
 
-    public static synchronized void startReadThread(){
+    public  synchronized void startReadThread(){
         reading=true;
         ReadCardThreadhandler=new ReadCardThread();
         ReadCardThreadhandler.start();
@@ -116,6 +117,8 @@ public class IDCardUtil {
 //                }
 //            }
 //        });
+
+
 
     }
 
