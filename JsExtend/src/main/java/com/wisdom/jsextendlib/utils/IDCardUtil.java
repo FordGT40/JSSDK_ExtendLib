@@ -184,7 +184,7 @@ public class IDCardUtil {
                         }
                     }
                     else{
-                        if (count<15) {
+                        if (count>15) {
                             String status= util.bytesToHexString(new byte[]{retInfo.sw1,retInfo.sw2,retInfo.sw3});
                             mHandler.obtainMessage(UpdateStatus,"e3").sendToTarget();
                             // if()
