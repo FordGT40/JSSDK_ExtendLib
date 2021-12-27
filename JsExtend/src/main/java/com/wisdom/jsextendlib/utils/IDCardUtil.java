@@ -190,9 +190,6 @@ public class IDCardUtil {
                             // if()
                             // mHandler.obtainMessage(UpdateStatus,String.format("读卡总数=%s,成功=%s,状态=%s",count,success,status)).sendToTarget();
                             Thread.sleep(200);
-                        }else{
-                            mHandler.obtainMessage(UpdateStatus,"e4").sendToTarget();
-
                         }
 
                     }
