@@ -27,7 +27,7 @@ public class InitJsExtendSDKUtil {
    public static void init(Application application){
        Bridge.INSTANCE.openLog();
         Map<String, BridgeHandler> bridgeHandlerMap = new HashMap();
-        bridgeHandlerMap.put("WISDOM.app.readIDCard", new GetIDCardHandler());
+        bridgeHandlerMap.put("WISDOM.app.readIDCard", new GetIDCardHandler(application));
         JsInterfaceBridge.init(application, bridgeHandlerMap);
    }
 }

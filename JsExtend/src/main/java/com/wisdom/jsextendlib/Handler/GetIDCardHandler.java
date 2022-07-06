@@ -19,10 +19,14 @@ import com.wisdom.jsextendlib.utils.IDCardUtil;
  * @change
  */
 public class GetIDCardHandler  extends BridgeHandler {
+    IDCardUtil idCardUtil;
+    public GetIDCardHandler(Context context) {
+         idCardUtil = new IDCardUtil();
+        idCardUtil.initReadCard(context);
+    }
+
     @Override
     public void handler(Context context, String data, final CallBackFunction function) {
-        IDCardUtil idCardUtil = new IDCardUtil();
-        idCardUtil.initReadCard(context);
         idCardUtil.startReadThread();
         idCardUtil.setOnChangeListener(new IDCardUtil.GetCardListener() {
             @Override
@@ -54,5 +58,6 @@ public class GetIDCardHandler  extends BridgeHandler {
 
         });
     }
+
 
 }
