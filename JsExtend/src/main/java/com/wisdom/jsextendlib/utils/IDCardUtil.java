@@ -134,7 +134,7 @@ public class IDCardUtil {
 
     }
 
-    private static void OpenReader(){
+    private static  synchronized void OpenReader(){
         if(!idCardReaderModule.isOpen())
             idCardReaderModule.open();
     }
