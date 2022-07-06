@@ -102,7 +102,7 @@ public class IDCardUtil {
         ReadCardThreadhandler.start();
     }
 
-    static synchronized void stopRead(){
+    public  static synchronized void stopRead(){
         //停止读卡线程
         if(ReadCardThreadhandler!=null){
             ReadCardThreadhandler.StopRead();
