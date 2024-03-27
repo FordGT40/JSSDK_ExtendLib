@@ -15,6 +15,7 @@ import com.smallbuer.jsbridge.core.BridgeHandler;
 import com.smallbuer.jsbridge.core.CallBackFunction;
 import com.synjones.idcard.IDCard;
 import com.wisdom.jsextendlib.Model.BaseModel;
+import com.wisdom.jsextendlib.utils.Base64Utils;
 import com.wisdom.jsextendlib.utils.IDCardUtil;
 
 import java.util.HashMap;
@@ -52,7 +53,9 @@ public class GetIDCardHandler  extends BridgeHandler {
                 usbDevice = dev;
             }
         }
-        if (usbDevice == null) return false;
+        if (usbDevice == null) {
+            return false;
+        }
         if (!usbManager.hasPermission(usbDevice)) {
             // 外置监听
             @SuppressLint("UnspecifiedImmutableFlag")
@@ -80,7 +83,8 @@ public class GetIDCardHandler  extends BridgeHandler {
         idCardUtil.setOnChangeListener(new IDCardUtil.GetCardListener() {
             @Override
             public void succeed(IDCard idcard) {
-                BaseModel model = new BaseModel("成功",0,idcard);
+
+                BaseModel model = new BaseModel("成功", Base64Utils.bitmapToBase64(idcard.getPhoto()),0,idcard);
                 LogUtils.i("handler:onSucceed");
                 function.onCallBack(GsonUtils.toJson(model));
             }

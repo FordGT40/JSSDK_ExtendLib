@@ -140,13 +140,15 @@ public class IDCardUtil {
     }
 
     private static synchronized void OpenReader() {
-        if (!idCardReaderModule.isOpen())
+        if (!idCardReaderModule.isOpen()) {
             idCardReaderModule.open();
+        }
     }
 
 
     //读卡线程
     static class ReadCardThread extends Thread {
+        @Override
         public void run() {
             OpenReader();
             if (!idCardReaderModule.isOpen()) {
@@ -162,9 +164,12 @@ public class IDCardUtil {
                 try {
                     IDCardReaderRetInfo retInfo;
                     if (true)//只读身份证文字和照片
+                    {
                         retInfo = idCardReaderModule.getIDcardInfo();
-                    else//读身份证文字，照片和指纹
+                    } else//读身份证文字，照片和指纹
+                    {
                         retInfo = idCardReaderModule.getIDcardInfo(false, true, true);
+                    }
                     count++;
                     //samvID=idCardReaderModule.getSamvIDString();//获取公安部二代证模块编号
                     //String appendAddress=idCardReaderModule.getAppendAddress();//获取身份证内的追加地址信息
